@@ -1,0 +1,26 @@
+fragment PostMetaFields on PostRecord {
+  _publishedAt
+  _updatedAt
+  cover {
+    responsiveImage {
+      ...ResponsiveImageFields
+    }
+  }
+  title
+  slug
+  subtitle
+  tags {
+    slug
+    title
+  }
+}
+
+fragment PostFields on PostRecord {
+  _seoMetaTags {
+    attributes
+    content
+    tag
+  }
+  ...PostMetaFields
+  content
+}

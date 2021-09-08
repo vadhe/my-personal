@@ -1,0 +1,25 @@
+query tagsStaticPaths($skip: IntType) {
+  allTags(first: 100, orderBy: title_ASC, skip: $skip) {
+    slug
+  }
+}
+
+query tagSlugLookup($slug: String!) {
+  tag(filter: { slug: { eq: $slug } }) {
+    id
+    title
+    slug
+  }
+}
+
+query tagRelations($id: ItemId!) {
+  allAppearances(filter: { tags: { anyIn: [$id] } }) {
+    ...AppearanceFragment
+  }
+  allPosts(filter: { tags: { anyIn: [$id] } }) {
+    ...PostMetaFields
+  }
+  allShowcases(filter: { tags: { anyIn: [$id] } }) {
+    ...ShowcaseFragment
+  }
+}

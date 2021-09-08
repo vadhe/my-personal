@@ -1,0 +1,17 @@
+query getPosts($skip: IntType) {
+  allPosts(orderBy: _publishedAt_DESC, skip: $skip) {
+    ...PostMetaFields
+  }
+}
+
+query getPost($slug: String!) {
+  post(filter: { slug: { eq: $slug } }) {
+    ...PostFields
+  }
+}
+
+query postStaticPaths($skip: IntType) {
+  allPosts(first: 100, orderBy: title_DESC, skip: $skip) {
+    slug
+  }
+}
